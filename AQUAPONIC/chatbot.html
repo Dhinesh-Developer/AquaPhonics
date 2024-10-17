@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #e8f5e9; /* Light shadow green background for body content */
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chatbot-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: hsl(177, 70%, 41%); /* HSL theme for chatbot background */
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            white-space: pre-wrap; /* Preserve whitespace */
+            animation: fadeIn 0.5s; /* Animation for messages */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .user-message {
+            background-color: #42a5f5; /* Light blue for user messages */
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #0d47a1; /* Darker blue for bot messages */
+        }
+
+        .input-group {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .input-group button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0d47a1;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .input-group button:hover {
+            background-color: #1565c0;
+        }
+
+        .clear-button {
+            background-color: #d32f2f;
+        }
+
+        .clear-button:hover {
+            background-color: #e57373;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chatbot-container">
+        <div class="chatbot-header">Agriculture Chatbot</div>
+
+        <div id="chatbox" style="max-height: 400px; overflow-y: auto;">
+            <div class="message bot-message">Hello! How can I assist you today?</div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+            <button class="clear-button" onclick="clearInput()">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        const questionsAnswers = {
+            // Agriculture Questions
+            "What is agriculture?": "Agriculture is the science and art of cultivating plants and livestock.",
+            "What are the types of farming?": "The main types include arable farming, pastoral farming, mixed farming, and aquaculture.",
+            "What is crop rotation?": "Crop rotation is growing different crops in the same area to improve soil health and reduce pests.",
+            "What is organic farming?": "Organic farming uses natural substances and processes to produce crops and livestock.",
+            "How does irrigation help agriculture?": "Irrigation provides water to crops during dry periods, improving plant growth and yield.",
+            "What are fertilizers used for?": "Fertilizers provide essential nutrients to crops, enhancing growth and yield.",
+            "What is the importance of agriculture?": "Agriculture is essential for food production, economic development, and environmental sustainability.",
+            "How does climate change affect agriculture?": "Climate change can impact crop yields, pest and disease prevalence, and water availability.",
+            "What is sustainable agriculture?": "Sustainable agriculture aims to meet current food needs while preserving resources for future generations.",
+            "What are cover crops?": "Cover crops are planted to prevent soil erosion, improve soil health, and manage pests.",
+            // IoT Questions
+            "What is IoT?": "IoT (Internet of Things) refers to the network of physical devices connected to the internet, allowing them to collect and exchange data.",
+            "How does IoT work?": "IoT works by connecting devices to the internet, enabling them to send and receive data, which can be analyzed for insights.",
+            "What are the applications of IoT in agriculture?": "IoT applications in agriculture include precision farming, crop monitoring, soil management, and livestock tracking.",
+            "What is a smart farm?": "A smart farm uses IoT devices and technology to improve agricultural efficiency, productivity, and sustainability.",
+            "What is the role of sensors in IoT?": "Sensors collect data about the environment, such as temperature, humidity, and soil moisture, which can be analyzed to make informed decisions.",
+            "What is data analytics in IoT?": "Data analytics in IoT involves processing and analyzing data collected from devices to derive insights and improve decision-making.",
+            "How does IoT improve crop yield?": "IoT improves crop yield by providing real-time data on soil conditions, weather, and crop health, allowing farmers to make timely interventions.",
+            "What are the challenges of implementing IoT in agriculture?": "Challenges include high costs, data security, and the need for reliable internet connectivity in rural areas."
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const messageText = userInput.value.trim();
+
+            // Display user message
+            if (messageText) {
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('message', 'user-message');
+                userMessage.textContent = messageText;
+                document.getElementById('chatbox').appendChild(userMessage);
+
+                // Find a matching response
+                const botResponse = findBotResponse(messageText);
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('message', 'bot-message');
+                botMessage.textContent = botResponse;
+                document.getElementById('chatbox').appendChild(botMessage);
+
+                // Clear input
+                userInput.value = '';
+
+                // Scroll to the bottom of the chatbox
+                document.getElementById('chatbox').scrollTop = document.getElementById('chatbox').scrollHeight;
+            }
+        }
+
+        function findBotResponse(input) {
+            for (const question in questionsAnswers) {
+                if (input.toLowerCase().includes(question.toLowerCase())) {
+                    return questionsAnswers[question];
+                }
+            }
+            return "Sorry, I don't have an answer for that.";
+        }
+
+        function clearInput() {
+            document.getElementById('userInput').value = '';
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua Phonics - Agri Visionaries</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background for body content */
+            color: #34495e; /* Darker text color */
+            font-family: 'Times New Roman', Arial, sans-serif; /* Changed font to Times New Roman */
+        }
+        .navbar {
+            background-color: #00796b; /* Teal color for navbar */
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .nav-link {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #cfd8dc; /* Light grey on hover */
+        }
+        footer {
+            background-color: #00796b; /* Teal color for footer */
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .tank-image {
+            width: 100%; /* Ensure tank images take full width */
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .button-style {
+            background-color: #26a69a; /* Updated button color */
+            color: white;
+            border-radius: 25px;
+            margin-top: 10px;
+        }
+        .popup-message {
+            display: none;
+            background-color: #00796b; /* Teal for popup */
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            text-transform: uppercase; /* Uppercase titles */
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .coral-background {
+            background-color: rgba(255, 255, 255, 0.8); /* Light background for coral section */
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            color: black;
+            text-align: center;
+            /* Optional: Add box-shadow for a slight 3D effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .coral-image {
+            width: 70%; /* Set width for coral image */
+            height: auto; /* Maintain aspect ratio */
+            margin: 0 auto; /* Center the image */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AquaPhonics</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="chatbot.html">Chatbot</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- First Column (Fish Tank) -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 class="section-title">FISH TANK</h2>
+                        <img src="tank1.jpeg" class="tank-image" alt="Fish Tank">
+                        <button class="btn button-style" onclick="showPopup(1)">PUMP WATER TO FILTRATION</button>
+                        <div id="popup1" class="popup-message">Water pumped from Fish Tank to Filtration</div>
+                        <div class="mt-3">
+                            <p>Ammonia Level: <span id="ammonia1">0.5 ppm</span></p>
+                            <p>Number of Fishes: 25</p>
+                            <p>Water Quality: Good</p>
+                            <p>pH Level: 7.2</p>
+                        </div>
+                        <p class="mt-3">Effective water management ensures optimal living conditions for aquatic life and promotes sustainable practices.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Column (Filtration) -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 class="section-title">FILTRATION</h2>
+                        <img src="tank2.jpeg" class="tank-image" alt="Filtration">
+                        <button class="btn button-style" onclick="showPopup(2)">TRANSFER WATER TO PLANT</button>
+                        <div id="popup2" class="popup-message">Water transferred from Filtration to Plant</div>
+                        <div class="mt-3">
+                            <p>Beneficial Bacteria: 
+                                <br>Nitrosomonas</p>
+                            <p>Water Quality: Excellent</p>
+                            <p>pH Level: 7.0</p>
+                        </div>
+                        <p class="mt-3">Proper filtration techniques not only clean the water but also maintain the ecological balance essential for plant growth.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third Column (Plant) -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h2 class="section-title">PLANT</h2>
+                        <img src="tank3.jpeg" class="tank-image" alt="Plant">
+                        <button class="btn button-style" onclick="showPopup(3)">TRANSFER WATER TO FISH TANK</button>
+                        <div id="popup3" class="popup-message">Water transferred from Plant to Fish Tank</div>
+                        <div class="mt-3">
+                            <p>Plants Growing: Lettuce, Kale</p>
+                            <p>Plant Growth Level: 75%</p>
+                            <p>Water Quality: Optimal</p>
+                            <p>pH Level: 6.8</p>
+                        </div>
+                        <p class="mt-3">Utilizing aquaponics helps in recycling water efficiently, promoting water conservation and healthier crops.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IoT Agriculture Section -->
+        <div class="coral-background">
+            <h2>SMART AQUAPONICS SYSTEM</h2>
+            <p>This project is a smart aquaponics system prototype that automates water flow between three tanks: a fish tank, a filter tank, and a plant tank. Using the ESP8266 NodeMCU, the system controls three pumps that manage the circulation of water between the tanks. The user can access a web interface to remotely control the water pumps and adjust the water flow through the tanks for optimal fish and plant growth.</p>
+            <p>The Wi-Fi connectivity allows the user to interact with the system via a smartphone, making it convenient to monitor and manage the aquaponics ecosystem from anywhere within the network. The system supports three main stages of water circulation:</p>
+            <ul>
+                <li>Fish tank to filter tank</li>
+                <li>Filter tank to plant tank</li>
+                <li>Plant tank back to the fish tank</li>
+            </ul>
+            <p>The project leverages IoT technology, enhancing the sustainability and efficiency of home-based or small-scale aquaponics farming systems. It focuses on resource-saving practices by ensuring continuous water circulation, reducing manual intervention, and optimizing the growth of fish and plants together in a symbiotic environment.</p>
+            
+         
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Agri Visionaries. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Function to show popup message
+        function showPopup(popupNumber) {
+            var popup = document.getElementById("popup" + popupNumber);
+            popup.style.display = "block";
+            setTimeout(function() {
+                popup.style.display = "none";
+            }, 3000); // Popup will be visible for 3 seconds
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
